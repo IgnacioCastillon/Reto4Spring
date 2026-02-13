@@ -1,0 +1,100 @@
+# API REST Hoteles – Reto4 Spring Boot
+
+## Descripción del proyecto
+
+Este proyecto consiste en el desarrollo de una API REST para la gestión de hoteles y reservas utilizando Spring Boot.
+
+La aplicación permite crear hoteles, consultarlos, filtrarlos por rango de precio y gestionar reservas. Además, se ha implementado seguridad para proteger determinados endpoints mediante autenticación.
+
+El objetivo principal ha sido aplicar arquitectura en capas (Controller, Service y Repository), trabajar con JPA y asegurar la API con Spring Security.
+
+
+## Tecnologías utilizadas
+
+- Java 17
+- Spring Boot
+- Spring Web
+- Spring Data JPA
+- Spring Security
+- MySQL
+- Maven
+
+
+## Estructura del proyecto
+
+El proyecto sigue una arquitectura en capas:
+
+- Controller → Gestiona las peticiones HTTP.
+- Service → Contiene la lógica de negocio.
+- Repository → Acceso a base de datos mediante JPA.
+- Entities → Representan las tablas de la base de datos.
+
+
+## Endpoints principales
+
+### Obtener todos los hoteles
+
+GET /apiv2/hotels
+
+
+### Filtrar hoteles por rango de precio
+
+GET /apiv2/hotels/precioBetween/{min}/{max}
+
+Ejemplo:
+
+GET http://localhost:8081/apiv2/hotels/precioBetween/70/80
+
+Devuelve los hoteles cuyo precio por noche esté entre los valores indicados.
+
+
+### Crear un hotel (PROTEGIDO)
+
+POST /apiv2/hotels
+
+Este endpoint está protegido con autenticación Basic.
+
+Usuario configurado:
+
+username: admin
+password: admin123
+
+Solo los usuarios con rol ADMIN pueden crear hoteles.
+
+
+## Seguridad
+
+Se ha configurado Spring Security para:
+
+- Permitir acceso libre a los métodos GET.
+- Restringir los métodos POST a usuarios autenticados con rol ADMIN.
+- Utilizar autenticación HTTP Basic.
+- Encriptar contraseñas con BCrypt.
+
+De esta forma se evita que cualquier usuario pueda modificar los datos sin autorización.
+
+
+## Base de datos
+
+La base de datos utilizada es MySQL.
+
+Las entidades principales son:
+
+- Hotel
+- Reserva
+
+La configuración de conexión se encuentra en el archivo application.properties.
+
+
+## Cómo ejecutar el proyecto
+
+1. Clonar el repositorio.
+2. Crear la base de datos en MySQL.
+3. Configurar usuario y contraseña en application.properties.
+4. Ejecutar la clase principal del proyecto.
+5. Probar los endpoints mediante Postman o archivo .http.
+
+
+## Conclusión
+
+Con este proyecto he trabajado el desarrollo de APIs REST completas, el uso de consultas personalizadas con Between, la arquitectura en capas y la seguridad con Spring Security. También he aprendido a gestionar errores como 404 por problemas de mapping o configuración incorrecta de rutas.
